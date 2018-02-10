@@ -1,7 +1,7 @@
 {
   "name": "selfish-google-drive",
   "version": "1.0.0",
-  "description": "Google drive api for that access your own account ~",
+  "description": "Google drive api for that access your own account",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
