@@ -1,11 +1,9 @@
 const _ = require('lodash');
-
+const fs = require('fs');
 const bluebird = require('bluebird');
-
 const superagent = require('superagent');
 
 const request = bluebird.promisifyAll(superagent);
-
 const constant = require('../../utils/constants');
 
 /**
@@ -17,9 +15,9 @@ const constant = require('../../utils/constants');
  *   expires_in: '3600'
  * }
  * @param {Object} credential
- * @param {Object} credential.clientID
- * @param {Object} credential.clientSecret
- * @param {Object} credential.refreshToken
+ * @param {String} credential.clientID
+ * @param {String} credential.clientSecret
+ * @param {String} credential.refreshToken
  * @return {Object}
  */
 module.exports = (credential) => {
@@ -40,6 +38,10 @@ module.exports = (credential) => {
         throw new Error(_.get(response, 'body'));
       }
 
-      return _.get(response, 'body');
+      const token = _.get(response, 'body');
+
+      fs.writeFileSync('token.json', JSON.stringify(token, null, 2), 'utf8');
+
+      return bluebird.resolve(token);
     });
 };

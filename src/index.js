@@ -1,26 +1,27 @@
 const _ = require('lodash');
-const getAccessToken = require('./lib/getAccessToken');
+
+const mkdir = require('./lib/mkdir');
+
+const loadToken = require('../utils/loadToken');
+const promise = require('../utils/promise');
 
 const library = {
-  getAccessToken,
+  mkdir,
 };
 
 /**
  * Load all possible wrapper google drive api
  * @param {Object} credential
- * @param {Object} credential.clientID
- * @param {Object} credential.clientSecret
- * @param {Object} credential.refreshToken
+ * @param {String} credential.clientID
+ * @param {String} credential.clientSecret
+ * @param {String} credential.refreshToken
  * @return {Object.<function>}
  */
 module.exports = (credential) => {
-  const clientID = _.get(credential, 'clientID');
-  const clientSecret = _.get(credential, 'clientSecret');
-  const refreshToken = _.get(credential, 'refreshToken');
+  const mainFuncs = _.mapValues(library, func => params => loadToken(credential)
+    .then(token => func(token, params)));
 
-  if (!clientID || !clientSecret || !refreshToken) {
-    throw new Error('Should provide clientId, clientSecret, and refreshToken');
-  }
+  _.assign(mainFuncs, { loadToken: _.partial(loadToken, credential) });
 
-  return _.mapValues(library, func => _.partial(func, credential));
+  return mainFuncs;
 };
