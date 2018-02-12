@@ -31,7 +31,11 @@ module.exports = (credential) => {
       .catch((error) => {
         // 401 can happened because access token already expired
         if (error.status !== 401) {
-          Bluebird.reject(error.message);
+          return Bluebird.reject(error.message);
+        }
+
+        if (closure.maxTry <= 0) {
+          return Bluebird.reject('Max try already exceeded');
         }
 
         closure.maxTry -= 1;
