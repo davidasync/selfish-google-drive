@@ -6,6 +6,12 @@ const getToken = require('../src/lib/getToken');
 
 /**
  * Create / load token from json file
+ * Example output
+ * {
+ *   access_token: 'somestring'
+ *   token_type: 'Bearer',
+ *   expires_in: '3600'
+ * }
  * @param {Object} credential
  * @param {Object} credential.clientID
  * @param {Object} credential.clientSecret

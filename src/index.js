@@ -2,12 +2,14 @@
 const _ = require('lodash');
 const Bluebird = require('bluebird');
 const mkdir = require('./lib/mkdir');
+const ls = require('./lib/ls');
 
 const loadToken = require('../utils/loadToken');
 const constants = require('../utils/constants');
 
 const library = {
   mkdir,
+  ls,
 };
 
 /**
@@ -28,6 +30,7 @@ module.exports = (credential) => {
     closure.maxTry = constants.MAX_ERROR_TRY;
 
     return func()
+      .then(response => _.get(response, 'body'))
       .catch((error) => {
         // 401 can happened because access token already expired
         if (error.status !== 401) {

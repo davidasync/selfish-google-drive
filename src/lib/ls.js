@@ -8,26 +8,31 @@ const constant = require('../../utils/constants');
 /**
  * Make directory at google drive
  * Example output,
- * { kind: 'drive#file',
- *   id: 'somestring',
- *   name: 'efek rumah kaca',
- *   mimeType: 'application/vnd.google-apps.folder' }
+ * { kind: 'drive#fileList',
+ *   nextPageToken: 'somestring'
+ *   incompleteSearch: false,
+ *   files:
+ *    [ { kind: 'drive#file',
+ *        id: 'somestring',
+ *        name: 'efek rumah kaca',
+ *        mimeType: 'application/vnd.google-apps.folder' },
+ *      { kind: 'drive#file',
+ *        id: 'somestring',
+ *        name: '3807540.jpg',
+ *        mimeType: 'image/jpeg' } ]
  * @param {Object} token
  * @param {String} token.access_token
- * @param {String} folderName
  * @returns {Object}
  */
-module.exports = (token, folderName) => {
-  const data = {
-    name: folderName,
-    mimeType: 'application/vnd.google-apps.folder',
-  };
-
+module.exports = (token) => {
   const accessToken = _.get(token, 'access_token');
 
   return request
-    .post(constant.mkdirUrl)
-    .send(data)
+    .get(constant.lsUrl)
+    .query({
+      corpora: 'user',
+      pageSize: 1000,
+    })
     .set('Accept', 'application/json')
     .set('Authorization', `Bearer ${accessToken}`)
     .endAsync();
