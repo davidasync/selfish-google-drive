@@ -45,6 +45,7 @@ module.exports = (credential) => {
       });
   });
 
+  // Add load token to main library function
   _.assign(mainFuncs, { loadToken: _.partial(loadToken, credential) });
 
   return mainFuncs;
