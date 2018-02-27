@@ -1,8 +1,11 @@
 
 const _ = require('lodash');
 const Bluebird = require('bluebird');
+
 const mkdir = require('./lib/mkdir');
 const ls = require('./lib/ls');
+const find = require('./lib/find');
+const wget = require('./lib/wget');
 
 const loadToken = require('../utils/loadToken');
 const constants = require('../utils/constants');
@@ -10,6 +13,8 @@ const constants = require('../utils/constants');
 const library = {
   mkdir,
   ls,
+  find,
+  wget,
 };
 
 /**
@@ -23,18 +28,24 @@ const library = {
 module.exports = (credential) => {
   const mainFuncs = _.mapValues(library, _func => (params) => {
     const func = shouldRefreshToken => loadToken(credential, shouldRefreshToken)
-      .then(token => _func(token, params));
+      .then(token => _func(token, params))
+      .then((response) => {
+        if (_.get(response, 'body')) {
+          return _.get(response, 'body');
+        }
+
+        return response;
+      });
 
     const closure = {};
 
     closure.maxTry = constants.MAX_ERROR_TRY;
 
     return func()
-      .then(response => _.get(response, 'body'))
-      .catch((error) => {
+      .catch((response) => {
         // 401 can happened because access token already expired
-        if (error.status !== 401) {
-          return Bluebird.reject(error.message);
+        if (response.status !== 401) {
+          return Bluebird.reject(response.message || response.error || response);
         }
 
         if (closure.maxTry <= 0) {

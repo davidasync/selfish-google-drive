@@ -24,7 +24,7 @@ const constant = require('../../utils/constants');
  * @param {String} token.access_token
  * @returns {Object}
  */
-module.exports = (token) => {
+module.exports = (token, searchKeyword) => {
   const accessToken = _.get(token, 'access_token');
 
   return request
@@ -32,7 +32,7 @@ module.exports = (token) => {
     .query({
       corpora: 'user',
       pageSize: 1000,
-      q: 'trashed = false',
+      q: `trashed = false and name contains '${_.trim(searchKeyword)}'`,
     })
     .set('Accept', 'application/json')
     .set('Authorization', `Bearer ${accessToken}`)
