@@ -40,7 +40,7 @@ module.exports = (credential) => {
 
       const token = _.get(response, 'body');
 
-      fs.writeFileSync('token.json', JSON.stringify(token, null, 2), 'utf8');
+      fs.writeFileSync('sgd-token.json', JSON.stringify(token, null, 2), 'utf8');
 
       return bluebird.resolve(token);
     });

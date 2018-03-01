@@ -27,11 +27,11 @@ module.exports = (credential, shouldRefreshToken) => {
     throw new Error('Should provide clientId, clientSecret, and refreshToken');
   }
 
-  if (!(fs.existsSync('token.json')) || shouldRefreshToken) {
+  if (!(fs.existsSync('sgd-token.json')) || shouldRefreshToken) {
     return getToken(credential);
   }
 
-  const token = JSON.parse(fs.readFileSync('token.json', { encoding: 'utf8' }));
+  const token = JSON.parse(fs.readFileSync('sgd-token.json', { encoding: 'utf8' }));
 
   return bluebird.resolve(token);
 };
