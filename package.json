@@ -1,6 +1,6 @@
 {
   "name": "selfish-google-drive",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Google drive api for that access your own account",
   "main": "index.js",
   "scripts": {
@@ -11,6 +11,10 @@
     "google-drive",
     "selfish-google-drive"
   ],
+  "repository" : { 
+    "type" : "git",
+    "url" : "https://github.com/davidasync/selfish-google-drive"
+  },
   "author": "davidasync",
   "license": "ISC",
   "dependencies": {
