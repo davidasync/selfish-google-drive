@@ -27,8 +27,8 @@ const credential = {
   refreshToken: 'somestring'
 }
 ```
-You can check how to generate the credential at https://stackoverflow.com/questions/19766912/how-do-i-authorise-an-app-web-or-installed-without-user-intervention
-const sgd =require('selfish-google-drive')(credential);
+You can check how to generate the credential at [How do I authorise an app (web or installed) without user intervention?
+](https://stackoverflow.com/questions/19766912/how-do-i-authorise-an-app-web-or-installed-without-user-intervention) 
 
 ##### 1. mkdir
 Create folder at your google drive
