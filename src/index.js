@@ -6,6 +6,7 @@ const mkdir = require('./lib/mkdir');
 const ls = require('./lib/ls');
 const find = require('./lib/find');
 const wget = require('./lib/wget');
+const scp = require('./lib/scp');
 
 const loadToken = require('../utils/loadToken');
 const constants = require('../utils/constants');
@@ -15,6 +16,7 @@ const library = {
   ls,
   find,
   wget,
+  scp,
 };
 
 /**
