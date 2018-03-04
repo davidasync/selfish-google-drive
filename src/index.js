@@ -45,8 +45,10 @@ module.exports = (credential) => {
 
     return func()
       .catch((response) => {
+        const responseStatus = response.status || response.statusCode;
+
         // 401 can happened because access token already expired
-        if (response.status !== 401) {
+        if (responseStatus !== 401) {
           return Bluebird.reject(response.message || response.error || response);
         }
 

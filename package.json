@@ -23,6 +23,7 @@
     "file-type": "^7.6.0",
     "lodash": "^4.17.5",
     "read-chunk": "^2.1.0",
+    "request": "^2.83.0",
     "superagent": "^3.8.2"
   },
   "devDependencies": {
