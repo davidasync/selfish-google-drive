@@ -24,15 +24,20 @@ const constant = require('../../utils/constants');
  * @param {String} token.access_token
  * @returns {Object}
  */
-module.exports = (token) => {
+module.exports = (token, folderId) => {
+  let gdQuery = 'trashed = false ';
   const accessToken = _.get(token, 'access_token');
+
+  if (folderId) {
+    gdQuery += `and parents in '${folderId}'`;
+  }
 
   return request
     .get(constant.lsUrl)
     .query({
       corpora: 'user',
       pageSize: 1000,
-      q: 'trashed = false',
+      q: gdQuery,
     })
     .set('Accept', 'application/json')
     .set('Authorization', `Bearer ${accessToken}`)

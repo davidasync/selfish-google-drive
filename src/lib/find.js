@@ -22,17 +22,29 @@ const constant = require('../../utils/constants');
  *        mimeType: 'image/jpeg' } ]
  * @param {Object} token
  * @param {String} token.access_token
+ * @param {String} searchObject.name
+ * @param {String} searchObject.mimeType
  * @returns {Object}
  */
-module.exports = (token, searchKeyword) => {
+module.exports = (token, searchObject) => {
   const accessToken = _.get(token, 'access_token');
+  const { name, mimeType } = searchObject;
+  let gdQuery = 'trashed = false ';
+
+  if (name) {
+    gdQuery += `and name contains '${_.trim(name)}' `;
+  }
+
+  if (mimeType) {
+    gdQuery += `and mimeType contains '${_.trim(mimeType)}' `;
+  }
 
   return request
     .get(constant.lsUrl)
     .query({
       corpora: 'user',
       pageSize: 1000,
-      q: `trashed = false and name contains '${_.trim(searchKeyword)}'`,
+      q: gdQuery,
     })
     .set('Accept', 'application/json')
     .set('Authorization', `Bearer ${accessToken}`)
