@@ -24,7 +24,7 @@ const downloadBinaryFile = (token, file) => {
 
   return new Bluebird((resolve, reject) => {
     request
-      .get(`${constant.wget.download}/${fileId}`)
+      .get(`${constant.wget}/${fileId}`)
       .query({
         alt: 'media',
       })
