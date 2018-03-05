@@ -1,6 +1,6 @@
 {
   "name": "selfish-google-drive",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Google drive api for that access your own account",
   "main": "src/index.js",
   "scripts": {
