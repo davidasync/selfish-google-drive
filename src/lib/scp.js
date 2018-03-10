@@ -5,7 +5,7 @@ const readChunk = require('read-chunk');
 const fileType = require('file-type');
 const request = Bluebird.promisify(require('request'));
 
-const constant = require('../../utils/constants');
+const constant = require('../utils/constants');
 
 /**
  * Upload a file to google drive

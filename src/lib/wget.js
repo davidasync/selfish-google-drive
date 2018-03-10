@@ -4,8 +4,8 @@ const Bluebird = require('bluebird');
 const superagent = require('superagent');
 
 const request = Bluebird.promisifyAll(superagent);
-const constant = require('../../utils/constants');
-const GDMimeType = require('../../utils/GDMimeType');
+const constant = require('../utils/constants');
+const GDMimeType = require('../utils/GDMimeType');
 
 /**
  * Download file from google drive

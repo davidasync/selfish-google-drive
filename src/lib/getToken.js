@@ -4,7 +4,7 @@ const bluebird = require('bluebird');
 const superagent = require('superagent');
 
 const request = bluebird.promisifyAll(superagent);
-const constant = require('../../utils/constants');
+const constant = require('../utils/constants');
 
 /**
  * Get access token
