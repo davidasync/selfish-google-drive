@@ -1,10 +1,10 @@
 {
   "name": "selfish-google-drive",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Google drive api for that access your own account with function that named with linux command line",
-  "main": "build/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "build": "rm -rf build && babel src/ -d build/ && flow",
+    "build": "babel src/ -d dist/ && flow",
     "publish": "npm run build && npm publish"
   },
   "keywords": [
@@ -18,7 +18,7 @@
     "url": "https://github.com/davidasync/selfish-google-drive"
   },
   "author": "davidasync",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/davidasync/selfish-google-drive/issues"
   },
