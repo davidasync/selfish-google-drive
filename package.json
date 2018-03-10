@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "build": "rm -rf build && babel src/ -d build/ && flow",
-    "publish": "npm run build && npm run publish"
+    "publish": "npm run build && npm publish"
   },
   "keywords": [
     "google",
