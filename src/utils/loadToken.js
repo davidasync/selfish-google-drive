@@ -1,8 +1,10 @@
+// @flow
+
 const _ = require('lodash');
 const fs = require('fs');
 const bluebird = require('bluebird');
 
-const getToken = require('../src/lib/getToken');
+const getToken = require('../lib/getToken');
 
 /**
  * Create / load token from json file
@@ -18,7 +20,7 @@ const getToken = require('../src/lib/getToken');
  * @param {Object} credential.refreshToken
  * @return {Object.<function>}
  */
-module.exports = (credential, shouldRefreshToken) => {
+module.exports = (credential: {clientID: String, clientSecret: String, refreshToken: String}, shouldRefreshToken: Boolean) => {
   const clientID = _.get(credential, 'clientID');
   const clientSecret = _.get(credential, 'clientSecret');
   const refreshToken = _.get(credential, 'refreshToken');

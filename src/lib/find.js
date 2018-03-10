@@ -1,3 +1,5 @@
+// @flow
+
 const _ = require('lodash');
 const bluebird = require('bluebird');
 const superagent = require('superagent');
@@ -26,7 +28,7 @@ const constant = require('../utils/constants');
  * @param {String} searchObject.mimeType
  * @returns {Object}
  */
-module.exports = (token, searchObject) => {
+module.exports = (token: {access_token: String, token_type: String, expires_in: String}, searchObject: {name: String, mimeType: ?String}) => {
   const accessToken = _.get(token, 'access_token');
   const { name, mimeType } = searchObject;
   let gdQuery = 'trashed = false ';

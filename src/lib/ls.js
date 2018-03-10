@@ -1,3 +1,5 @@
+// @flow
+
 const _ = require('lodash');
 const bluebird = require('bluebird');
 const superagent = require('superagent');
@@ -24,7 +26,7 @@ const constant = require('../utils/constants');
  * @param {String} token.access_token
  * @returns {Object}
  */
-module.exports = (token, folderId) => {
+module.exports = (token:{access_token: String, token_type: String, expires_in: String}, folderId: string) => {
   let gdQuery = 'trashed = false ';
   const accessToken = _.get(token, 'access_token');
 

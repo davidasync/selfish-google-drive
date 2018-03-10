@@ -1,3 +1,5 @@
+// @flow
+
 const _ = require('lodash');
 const fs = require('fs');
 const Bluebird = require('bluebird');
@@ -17,7 +19,18 @@ const constant = require('../utils/constants');
  * @param {String} file.folderId
  * @returns {Promise.<Object>}
  */
-module.exports = (token, file) => {
+module.exports = (
+  token: {
+    access_token: String,
+    token_type: String,
+    expires_in: String
+  },
+  file: {
+    name: string, 
+    path: string,
+    folder: string
+  }
+) => {
   const accessToken = _.get(token, 'access_token');
   const { name, path, folder } = file;
   const buffer = readChunk.sync(path, 0, 4100);

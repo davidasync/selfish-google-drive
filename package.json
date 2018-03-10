@@ -2,9 +2,10 @@
   "name": "selfish-google-drive",
   "version": "1.0.7",
   "description": "Google drive api for that access your own account with function that named with linux command line",
-  "main": "src/index.js",
+  "main": "build/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm -rf build && babel src/ -d build/ && flow",
+    "publish": "npm run build && npm run publish"
   },
   "keywords": [
     "google",
@@ -35,8 +36,10 @@
     "babel-preset-flow": "^6.23.0",
     "eslint": "^4.17.0",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-airbnb-flow": "^1.0.2",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.6.1"
+    "eslint-plugin-react": "^7.6.1",
+    "flow-bin": "^0.67.1"
   }
 }

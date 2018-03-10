@@ -1,3 +1,5 @@
+// @flow
+
 const _ = require('lodash');
 const fs = require('fs');
 const Bluebird = require('bluebird');
@@ -16,7 +18,19 @@ const GDMimeType = require('../utils/GDMimeType');
  * @param {String} file.path
  * @returns {String}
  */
-const downloadBinaryFile = (token, file) => {
+const downloadBinaryFile = (
+  token: {
+    access_token: String,
+    token_type: String,
+    expires_in: String
+  },
+  file: {
+    id: string, 
+    path: string,
+    mimeType: string,
+    exportTo: ?string
+  }
+) => {
   const accessToken = _.get(token, 'access_token');
   const fileId = _.get(file, 'id');
   const filePath = _.get(file, 'path');
@@ -60,7 +74,19 @@ const downloadBinaryFile = (token, file) => {
  * @param {String} file.mimeType
  * @returns {String}
  */
-const exportGD = (token, file) => {
+const exportGD = (
+  token: {
+    access_token: String,
+    token_type: String,
+    expires_in: String
+  },
+  file: {
+    id: string, 
+    path: string,
+    mimeType: string,
+    exportTo: ?string
+  }
+) => {
   const accessToken = _.get(token, 'access_token');
   const fileId = _.get(file, 'id');
   const filePath = _.get(file, 'path');
@@ -100,7 +126,19 @@ const exportGD = (token, file) => {
  * @param {String} file.mimeType
  * @returns {String}
  */
-module.exports = (token, file) => {
+module.exports = (
+  token: {
+    access_token: String,
+    token_type: String,
+    expires_in: String
+  },
+  file: {
+    id: string, 
+    path: string,
+    mimeType: string,
+    exportTo: ?string
+  }
+) => {
   const mimeType = _.get(file, 'mimeType');
 
   if (!GDMimeType[mimeType]) {

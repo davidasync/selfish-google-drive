@@ -1,3 +1,5 @@
+// @flow
+
 const _ = require('lodash');
 const bluebird = require('bluebird');
 const superagent = require('superagent');
@@ -17,7 +19,7 @@ const constant = require('../utils/constants');
  * @param {String} folderName
  * @returns {Object}
  */
-module.exports = (token, folderName) => {
+module.exports = (token:{access_token: String, token_type: String, expires_in: String}, folderName: string) => {
   const data = {
     name: folderName,
     mimeType: 'application/vnd.google-apps.folder',

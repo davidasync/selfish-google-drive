@@ -1,3 +1,5 @@
+// @flow
+
 const _ = require('lodash');
 const fs = require('fs');
 const bluebird = require('bluebird');
@@ -20,7 +22,7 @@ const constant = require('../utils/constants');
  * @param {String} credential.refreshToken
  * @return {Object}
  */
-module.exports = (credential) => {
+module.exports = (credential: {clientID: String, clientSecret: String, refreshToken: String}) => {
   const data = {
     grant_type: 'refresh_token',
     client_id: _.get(credential, 'clientID'),
